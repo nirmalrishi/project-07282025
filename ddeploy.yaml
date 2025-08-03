@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - name: deploy container
+      community.docker.docker_container:
+        name: test
+        image: nirmalrishi/abctech
+        state: started
+        ports:
+          - 8082:8080
+

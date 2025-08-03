@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - name: build image
+      community.docker.docker_image:
+        name: nirmalrishi/abctech
+        build:
+          path: .
+        source: build
+        push: true
+

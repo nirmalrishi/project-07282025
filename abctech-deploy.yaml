@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abctech-deploy
+spec:
+  replicas: 3
+  minReadySeconds: 45 # wait for 45 sec before pod is ready going to next
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  
+      maxSurge: 2        
+  selector:
+    matchLabels:
+      app: abctech
+  template:
+    metadata:
+      name: abctech
+      labels:
+        app: abctech
+    spec:
+      containers:
+      - image: nirmalrishi/abctech
+        name: app
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+   name: abctech-service
+spec:
+  type: NodePort
+  selector: 
+    app: abctech
+  ports:
+    - port: 8080
+      targetPort: 8080
