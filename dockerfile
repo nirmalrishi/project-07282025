@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-ADD jdk-8u331-linux-x64.tar.gz /tmp
+RUN apt-get update && apt-get install -y wget && wget https://github.com/lerndevops/code/raw/main/jdk-8u331-linux-x64.tar.gz -P /tmp/ && tar -xzvf /tmp/jdk-8u331-linux-x64.tar.gz -C /tmp/
 RUN mv /tmp/jdk1.8.0_331 /opt/java
-ADD apache-tomcat-9.0.63.tar.gz /tmp
+RUN wget https://github.com/lerndevops/code/raw/main/apache-tomcat-9.0.63.tar.gz -P /tmp/ && tar -xzvf /tmp/apache-tomcat-9.0.63.tar.gz -C /tmp/
 RUN mv /tmp/apache-tomcat-9.0.63 /opt/tomcat
 
 ENV JAVA_HOME=/opt/java
